@@ -2,72 +2,101 @@
 
 ## Overview
 - **Type**: Hybrid digital synthesizer
-- **Voices**: 4 (paraphonic)
-- **Oscillators**: 1 digital oscillator (13 types including wavetable, Karplus-Strong, harmonic, superwave, FM, granular, etc.)
-- **Filter**: Analog Oberheim SEM-style state-variable filter (LP/BP/HP)
-- **Keyboard**: 25-key capacitive touch (no moving keys), pressure-sensitive
-- **Sequencer**: 4 tracks, 64 steps
-- **Arpeggiator**: Built-in with multiple modes
-- **Modulation**: 3-slot matrix (cycling envelope, LFO, pressure/keyboard as sources)
+- **Voices**: 4 (paraphonic — single analog filter shared across voices, digital VCAs per-voice)
+- **Oscillators**: 1 digital oscillator with 22 engine types (Arturia, Mutable Instruments/Plaits, Noise Engineering)
+- **Filter**: Analog state-variable 12dB/oct (LP/BP/HP)
+- **Keyboard**: 25-key capacitive touch (no moving keys), polyphonic aftertouch
+- **Sequencer**: 64 steps, 2 patterns per preset (A/B banks)
+- **Arpeggiator**: Up, Order, Random, Pattern modes + Spice & Dice
+- **Modulation**: 5 sources x 7 destinations
+- **Presets**: 320 factory + 128+ user slots
 
 ## Connectivity
 | Interface | Direction | Details |
 |-----------|-----------|---------|
-| USB-B | In/Out | MIDI + firmware |
-| MIDI DIN Out | Out | 5-pin DIN (TRS adapter included) |
+| USB-B | In/Out | MIDI + power (class-compliant, can bus-power unit) |
+| 3.5mm TRS MIDI Out | Out | Type A (adapter included) |
+| 3.5mm TRS MIDI In | In | Type A (adapter included) |
 | Audio Out | Out | 1x 1/4" mono |
 | Headphone | Out | 1/8" stereo |
 | Clock In | In | 3.5mm |
 | Clock Out | Out | 3.5mm |
-| CV/Gate | Out | 2x 3.5mm (1V/oct pitch + gate) |
-| Pressure Out | Out | 3.5mm CV |
+| CV Pitch | Out | 3.5mm (1V/oct) |
+| CV Gate | Out | 3.5mm |
+| CV Pressure | Out | 3.5mm (routes aftertouch to modular) |
+
+No full-size 5-pin DIN MIDI (3.5mm TRS adapters included).
 
 ## MIDI Implementation
 
 ### Channel
 - Default: Channel 1 (configurable 1-16)
-- MPE: Not supported (paraphonic only)
+- Not MPE — single channel, but sends polyphonic aftertouch (MIDI 0xAn)
 
-### Key CCs
+### CC Map
 | CC | Parameter |
 |----|-----------|
-| 1 | Mod wheel (external) |
-| 9 | Osc Type |
-| 10 | Osc Wave |
-| 11 | Osc Timbre |
-| 12 | Osc Shape |
+| 2 | Keyboard Spice |
+| 5 | Glide |
+| 9 | Oscillator Type |
+| 10 | Oscillator Wave |
+| 12 | Oscillator Timbre |
+| 13 | Oscillator Shape |
 | 23 | Filter Cutoff |
-| 24 | Filter Resonance |
-| 26 | Cycling Env Rise |
-| 27 | Cycling Env Fall |
+| 24 | Cycling Env Amount |
+| 26 | Envelope Filter Amount |
 | 28 | Cycling Env Hold |
-| 29 | LFO Rate |
-| 33 | Glide |
-| 85 | Spice |
-| 86 | Dice |
+| 29 | Envelope Sustain |
+| 64 | Hold Button (toggle) |
+| 83 | Filter Resonance |
+| 91 | Arp/Seq Rate (free) |
+| 92 | Arp/Seq Rate (sync) |
+| 93 | LFO Rate (free) |
+| 94 | LFO Rate (sync) |
+| 102 | Cycling Env Rise |
+| 103 | Cycling Env Fall |
+| 105 | Envelope Attack |
+| 106 | Envelope Decay |
 
-Full CC map available via Arturia MIDI Control Center.
+### Oscillator Engine Types (22 as of firmware 5.0)
+| Source | Engines |
+|--------|---------|
+| Arturia (12) | Basic Waves, SuperWave, Harmonic, Karplus-Strong, Wavetable, Noise, Vocoder, User Wavetable, Sample, Scan Grain, Cloud Grain, Hit Grain |
+| Mutable Instruments (7) | Virtual Analog, Waveshaper, Two-Op FM, Formant, Chords, Speech, Modal |
+| Noise Engineering (3) | Bass (wave-folding), SawX (supersaw + chorus/phase mod), Harm (wavefolding + additive) |
 
 ### Program Change
-- 256 preset slots (128 factory + 128 user)
-- Bank select (CC 0) + Program Change
+- Supports PC for preset selection
 
 ### Sync
 - MIDI clock send/receive
 - Analog clock in/out (3.5mm, configurable ppqn)
 
 ## Unique Features
-- **Capacitive keyboard**: no mechanical keys — touch surface detects finger position and pressure. Enables slides and gestures not possible on standard keys.
-- **Spice & Dice**: randomization controls that add variation to sequences. Spice = amount of variation, Dice = re-roll the randomization.
-- **Paraphonic voicing**: 4 voices share a single filter, so all notes have the same filter character.
-- **Vocoder**: built-in vocoder mode using the line input.
+- **Capacitive keyboard**: touch surface detects finger position and polyphonic pressure. Enables slides and gestures.
+- **Spice & Dice**: Spice controls gate probability, Dice shuffles note order in sequences.
+- **Polyphonic aftertouch**: each key independently senses pressure (usable as controller for external poly-AT synths).
+- **CV outputs**: Pitch, Gate, and Pressure CV for connecting to modular gear.
 
 ## Software
 - **Arturia MIDI Control Center** — patch management, MIDI mapping, firmware updates
 
+## MicroFreak vs MiniFreak
+| Feature | MicroFreak | MiniFreak |
+|---------|-----------|-----------|
+| Voices | 4 paraphonic | 6 true polyphonic |
+| Oscillators | 1 engine | 2 engines |
+| Filter | 1 shared analog SVF | Per-voice analog filter |
+| Effects | None built-in | 3 FX slots |
+| Keyboard | 25-key capacitive, poly AT | 37-key slim keys, channel AT |
+| MIDI | USB + 3.5mm TRS | USB + full-size 5-pin DIN |
+| Audio out | Mono | Stereo |
+| Mod Matrix | 5x7 | 7x13 |
+
 ## Limitations
 - Mono audio output only (no stereo)
 - Paraphonic, not truly polyphonic (shared filter)
-- No MIDI input on DIN (output only, input via USB only)
-- No velocity (capacitive keyboard has pressure/aftertouch but not strike velocity)
+- No full-size DIN MIDI (3.5mm TRS only)
+- No built-in effects
+- No velocity (pressure-sensitive but no strike velocity)
 - 4-voice maximum

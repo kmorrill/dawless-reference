@@ -2,24 +2,28 @@
 
 ## Overview
 - **Type**: MIDI controller keyboard with sequencer and arpeggiator
-- **Keys**: 37 slim keys, velocity-sensitive + aftertouch
-- **Sequencer**: Polyphonic, 64 steps, 8 sequences
-- **Arpeggiator**: 8 modes (up, down, inclusive, exclusive, random, order, poly, walk)
-- **Chord mode**: Strum and chord memory
+- **Keys**: 32 slim keys, velocity-sensitive + channel aftertouch (curves adjustable)
+- **Sequencer**: Polyphonic, 64 steps, up to 8-note polyphony per step, 64 pattern slots
+- **Arpeggiator**: 16 modes including Phrase Arp (melodic transformer)
+- **Display**: OLED screen with push encoder
+- **Power**: USB bus-powered (no wall adapter needed)
+- **Dimensions**: 19.06" x 5.71" x 1.97", 2.43 lb
 
 ## Connectivity
 | Interface | Direction | Details |
 |-----------|-----------|---------|
-| USB-C | In/Out | MIDI + power |
+| USB-C | In/Out | MIDI + power (class-compliant) |
 | MIDI DIN Out | Out | 5-pin DIN |
 | MIDI DIN In | In | 5-pin DIN |
-| CV Pitch | Out | 3.5mm (V/oct or Hz/V) |
-| CV Gate | Out | 3.5mm (V-trig or S-trig) |
-| CV Mod | Out | 3.5mm |
+| CV Pitch | Out | 3.5mm (1V/oct) |
+| CV Gate | Out | 3.5mm |
+| CV Mod 1 | Out | 3.5mm (assignable: velocity, aftertouch, mod wheel, etc.) |
+| CV Mod 2 | Out | 3.5mm (assignable) |
 | Clock Out | Out | 3.5mm |
 | Clock In | In | 3.5mm |
-| Sustain | In | 1/4" pedal |
-| Expression | In | 1/4" TRS |
+| Sustain/Expression | In | 1/4" TRS |
+
+All MIDI output simultaneous on USB + DIN.
 
 ## MIDI Implementation
 
@@ -35,7 +39,7 @@
 | 11 | Expression pedal |
 | 64 | Sustain pedal |
 
-### Arpeggiator Modes
+### Arpeggiator (16 modes)
 | Mode | Behavior |
 |------|----------|
 | Up | Low to high |
@@ -46,18 +50,29 @@
 | Order | Order played |
 | Poly | All notes together |
 | Walk | Random walk (step up or down) |
+| + 8 more | Pattern variations and Phrase Arp |
 
-### Additional Features
-- **Hold**: Latch notes for arp/seq
-- **Tie**: Connect steps in sequencer
-- **Rest**: Silent steps in sequencer
-- **Swing**: Adjustable per sequence
-- **Gate length**: Adjustable per sequence
-- **Time division**: 1/4 to 1/32 including triplets
+**Phrase Arp**: remaps stored patterns to whatever notes you play — a melodic transformer that applies a rhythmic/melodic shape to your input.
+
+### Sequencer Features
+- Real-time, step, and unquantized recording
+- Pattern chaining for song-like arrangements
+- **Mutate**: introduces controlled random variations to existing patterns
+- **Capture**: convert arpeggio output into a sequence
+- **Spice & Dice**: randomize gate triggering and note order
+
+### Chord Mode
+- Trigger full chords from single keys
+- Locks to a harmonic key for consistent voicings
+
+### Scale Mode
+- Constrains keyboard output to a selected scale
+- Keys outside the scale are quantized or muted
 
 ### Sync
 - MIDI clock send/receive
-- Analog clock in/out (configurable ppqn: 1, 2, 24, 48 ppqn)
+- Analog clock in/out (configurable: 1, 2, 24, 48 ppqn)
+- Sends/receives start/stop messages
 - USB clock
 
 ## Software
@@ -65,7 +80,7 @@
 
 ## Limitations
 - No sound engine (controller only)
-- No screen/display
 - Slim keys (not full-size)
 - No MPE support
 - Single MIDI DIN output (no thru)
+- 32 keys (not 37)
