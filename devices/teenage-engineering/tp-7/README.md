@@ -16,7 +16,7 @@
 | Built-in speaker | Out | Mono |
 
 ## MIDI
-None. The TP-7 is a purely audio device with no MIDI capability.
+USB MIDI is supported over the USB-C connection alongside audio. Not a primary use case but the device is class-compliant.
 
 ## Audio Features
 - Variable speed playback
@@ -24,7 +24,12 @@ None. The TP-7 is a purely audio device with no MIDI capability.
 - Automatic recording modes
 - USB file transfer for recorded audio
 
+## Audio Interface
+- 6-channel, 24-bit/96 kHz USB audio interface over USB-C
+- Class-compliant (iOS/macOS/Windows/Linux)
+- 3x TRRS 3.5mm jacks (each configurable as input or output)
+- 128 GB internal storage
+
 ## Limitations
-- No MIDI sync or control
-- No audio interface mode over USB
 - Internal storage only (no SD card)
+- MIDI is secondary — no dedicated MIDI I/O beyond USB-C

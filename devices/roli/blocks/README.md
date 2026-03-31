@@ -13,6 +13,12 @@
 | Bluetooth LE | Out | MIDI (MPE), wireless |
 | DNA Connectors | Inter-module | Magnetic, data + power between blocks |
 
+## MPE Implementation
+- Channel 1 = global/master channel (preset changes, pedal data)
+- Channels 2-16 = per-note member channels (up to 15 simultaneous expressive notes)
+- Default pitch bend: ±48 semitones per-note, ±2 semitones on master channel
+- Three modes: MPE, Multi-Channel, Single-Channel (for non-MPE instruments)
+
 ## Lightpad Block
 - 15x15 LED grid with continuous pressure-sensitive touch surface
 - Not a button matrix — continuous XY + pressure sensing

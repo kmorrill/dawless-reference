@@ -54,6 +54,14 @@ end
 - Custom SuperCollider engines loaded per-script
 - **Softcut**: built-in 6-voice buffer manipulation engine (looping, delay, granular)
 - Full SuperCollider synthesis available
+- **Audio codec**: CS4270 I2S, externally clocked (crystal, no jitter), fixed 48 kHz
+- Input impedance: 10k ohm (balanced or unbalanced)
+- Output impedance: 590 ohm (balanced or unbalanced)
+
+## OSC
+- Full OSC send/receive over network (WiFi)
+- OSC is also the internal communication layer between Lua and SuperCollider
+- Can communicate with other OSC-capable devices/software on the network
 
 ## Script Ecosystem
 - Hundreds of community scripts at https://norns.community

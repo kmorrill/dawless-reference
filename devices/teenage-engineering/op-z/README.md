@@ -19,28 +19,48 @@ No DIN MIDI. USB-C MIDI is class-compliant.
 ## MIDI Implementation
 
 ### Channels
-Each track maps to a MIDI channel (1-16):
+Each track maps to a MIDI channel (1-16, reconfigurable via OP-Z app or `midi.json` in content mode):
 
 | Tracks | Type | Default Channels |
 |--------|------|-----------------|
 | 1-4 | Drum (kick, snare, perc, sample) | 1-4 |
 | 5-8 | Synth (bass, lead, arp, chord) | 5-8 |
-| 9-12 | FX/tape | 9-12 |
-| 13-16 | Visual/motion | 13-16 |
+| 9-10 | FX (FX1, FX2) | 9-10 |
+| 11-12 | Tape, Master | 11-12 |
+| 13 | Perform | 13 |
+| 14 | Lights (DMX via USB-C to USB-DMX adapter) | 14 |
+| 15 | Photomatic/Motion (visuals via app) | 15 |
+| 16 | Module/MIDI | 16 |
 
-### Key CCs
+### Key CCs (defaults, per-track)
 | CC | Function |
 |----|----------|
-| 1 | Parameter 1 (green encoder) |
-| 2 | Parameter 2 (blue encoder) |
-| 3 | Filter |
-| 4 | Resonance |
+| 1-2 | Parameter 1-2 (green/blue encoders) |
+| 3 | Filter cutoff |
+| 4 | Filter resonance |
+| 5-8 | Envelope ADSR (attack, decay, sustain, release) |
+| 9-12 | LFO (depth, speed, target, shape) |
+| 13-14 | FX 1/FX 2 send |
+| 16 | Volume |
+| 17 | Portamento |
+| 18 | Note style |
+
+All CC numbers are customizable per-track via the OP-Z app or `midi.json`.
 
 ### Step Components
-Step components (punch-in effects) add micro-timing, note repeat, and parameter sweeps per step. These are sequenced on-device but not directly controllable via MIDI CC.
+Step components (punch-in effects) add micro-timing, note repeat, and parameter sweeps per step. Sequenced on-device, not directly controllable via MIDI CC.
 
 ### Parameter Locks
 Per-step parameter automation. Stored in the sequence, not transmitted as CC during playback unless configured.
+
+### Program Change
+Supported for pattern/preset selection.
+
+### Multimedia Tracks
+- **Lights** (track 14): outputs DMX via USB-C to USB-DMX converter (ENTTEC recommended)
+- **Photomatic** (track 15): sequences stop-motion photo slideshows synced to music (via iOS/Mac app)
+- **Motion** (track 15): sequences 3D Unity-based visuals (via iOS/Mac app). Shares track with Photomatic.
+- All multimedia tracks use the same step sequencer and parameter locks as audio tracks.
 
 ## Sync
 - USB MIDI clock (send/receive)
