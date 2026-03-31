@@ -75,6 +75,42 @@
 - **MIDI Thru**: Configurable (default On)
 - **Sync clocks per beat**: 1, 2, 3, 4, 6, 8, 12, 24
 
+## Physical Controls
+
+### Layout
+Six rhythm instrument sections + bass section across the top panel. 16 step buttons for TR-REC. Four-digit 7-segment LED display.
+
+### Instrument Sections (left to right)
+
+| Section | Controls |
+|---------|----------|
+| **Bass Drum** | LEVEL knob, TUNE knob (pitch/decay toggle), DECAY button, instrument select button |
+| **Snare Drum** | LEVEL knob, TUNE knob (pitch/decay toggle), DECAY button, instrument select button |
+| **Tom / Hand Clap** | LEVEL knob (shared), TUNE knob (shared), HAND CLAP button, TOM button |
+| **Hi-Hat** | LEVEL knob (shared open/closed), DECAY knob, CLOSED HIHAT button, OPEN HIHAT button |
+| **Bass** | LEVEL knob, PITCH knob, DECAY knob, CUTOFF knob, RESO knob, ENV MOD knob, BASS button, KYBD button |
+| **Delay / Reverb** | DELAY knob, REVERB knob, ACCENT button |
+
+### Utility Controls
+
+| Control | Function |
+|---------|----------|
+| TEMPO/VALUE knob | Tempo/value adjustment |
+| VOLUME knob | MIX OUT volume |
+| 16 step buttons | TR-REC, pattern/bank select |
+| SHIFT + C (DELAY) | Configure delay |
+| SHIFT + OCT- (REVERB) | Configure reverb |
+| SHIFT + G# (RANDOM RHYTHM) | Generate random rhythm |
+| SHIFT + A (RANDOM BASS) | Generate random bass |
+
+Total: 17 knobs, ~14 buttons.
+
+## 3rd-Party Repos
+
+| Repo | Description |
+|------|-------------|
+| [natebosch/aira_pattern_editor](https://github.com/natebosch/aira_pattern_editor) | Flutter web app for editing T-8 pattern backup files |
+
 ## Limitations
 - No CC control of any parameters (tune, decay, level, cutoff, resonance, etc. are not MIDI-controllable)
 - No pitch bend

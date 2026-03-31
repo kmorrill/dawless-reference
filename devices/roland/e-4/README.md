@@ -69,6 +69,34 @@ External MIDI notes drive the vocoder pitch and harmony:
 - **MIDI Thru**: Configurable (forwards MIDI IN to MIDI OUT)
 - **SYNC IN jack**: Overrides MIDI clock setting when connected
 
+## Physical Controls
+
+### Layout
+Unique slider-based design (unlike knob-based S-1/T-8/J-6). Four-digit 7-segment LED display.
+
+### Controls
+
+| Control | Type | Function |
+|---------|------|----------|
+| VOLUME | Knob | MIX OUT volume |
+| SENS | Knob | Microphone input gain |
+| SCATTER | Knob | Scatter effect (chops audio into rhythmic fragments) |
+| PITCH | Slider | Voice pitch shift (+/- 1 octave, semitone increments) |
+| FORMANT | Slider | Voice formant shift (masculine <-> feminine character) |
+| REVERB | Slider | Reverb level; reassignable to Echo, Delay, or Chorus via VOCODER button |
+| AUTO PITCH | Button | Enable pitch correction / hard-tune effect |
+| HARMONY | Button | Add vocal harmonies; hold + PITCH slider to set key |
+| VOCODER | Button | Enable vocoder; hold + REVERB slider to change effect type |
+| LOOPER | Button | Looper record/play/overdub |
+
+Total: 3 knobs, 3 sliders, 4 effect buttons.
+
+### Notable
+
+| Repo | Description |
+|------|-------------|
+| [sonyhome/roland-e4-quick-reference](https://github.com/sonyhome/roland-e4-quick-reference) | E-4 quick reference card |
+
 ## Limitations
 - No CC control of any parameters (pitch, formant, scatter, reverb, etc. are not MIDI-controllable)
 - No Program Change support

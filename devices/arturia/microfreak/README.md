@@ -93,6 +93,63 @@ No full-size 5-pin DIN MIDI (3.5mm TRS adapters included).
 | Audio out | Mono | Stereo |
 | Mod Matrix | 5x7 | 7x13 |
 
+## Physical Controls
+
+### Digital Oscillator Section
+| Control | Type | CC |
+|---------|------|-----|
+| Type | Encoder | 9 |
+| Wave | Knob | 10 |
+| Timbre | Knob | 12 |
+| Shape | Knob | 13 |
+
+### Analog Filter
+| Control | CC | SHIFT |
+|---------|-----|-------|
+| Cutoff | 23 | -- |
+| Resonance | 83 | -- |
+| Filter Amount | 26 | -- |
+
+### Cycling Envelope
+| Control | CC | SHIFT |
+|---------|-----|-------|
+| Rise | 102 | Rise curve shape |
+| Fall | 103 | Fall curve shape |
+| Hold | 28 | -- |
+| Amount | 24 | -- |
+
+### Main Envelope (AD + Sustain)
+| Control | CC |
+|---------|-----|
+| Attack | 105 |
+| Decay | 106 |
+| Sustain | 29 |
+
+### LFO
+| Control | CC |
+|---------|-----|
+| LFO Rate (free) | 93 |
+| LFO Rate (sync) | 94 |
+
+### Performance
+| Control | CC |
+|---------|-----|
+| Glide | 5 |
+| Hold | 64 (toggle) |
+| Arp/Seq Rate (free) | 91 |
+| Arp/Seq Rate (sync) | 92 |
+| Keyboard Spice | 2 |
+
+Master Volume has NO CC assignment. 21 CCs total. **Notable**: Oscillator Type IS controllable via CC 9 (unlike MiniFreak).
+
+## 3rd-Party Repos
+
+| Repo | Description |
+|------|-------------|
+| [francoisgeorgy/microfreak-reader](https://github.com/francoisgeorgy/microfreak-reader) | Read & display MicroFreak presets via WebMIDI sysex (45 stars) |
+| [dmr-songquito/MicroFreak-Patches](https://github.com/dmr-songquito/MicroFreak-Patches) | Downloadable patch collection |
+| [midi.guide](https://midi.guide/) | Open CC/NRPN database with MicroFreak entry |
+
 ## Limitations
 - Mono audio output only (no stereo)
 - Paraphonic, not truly polyphonic (shared filter)

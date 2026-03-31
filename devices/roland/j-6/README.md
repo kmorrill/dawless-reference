@@ -58,6 +58,40 @@
 - **MIDI Thru**: Configurable
 - **Sync clocks per beat**: 1, 2, 3, 4, 6, 8, 12, 24
 
+## Physical Controls
+
+### Layout
+8 knobs, 2-octave rubber keyboard, step buttons. Juno-style chord sequencer. Four-digit 7-segment LED display.
+
+### Knobs
+
+| Knob | Normal | SHIFT |
+|------|--------|-------|
+| STYLE | Selects phrase style (arpeggio pattern) | -- |
+| VARIATION | Selects phrase variation within style | -- |
+| FILTER | Filter cutoff | Resonance |
+| ENVELOPE | Envelope decay/release | Attack |
+| DELAY | Delay level | Delay time |
+| REVERB | Reverb level | Reverb time |
+| TEMPO/VALUE | Tempo/value/menu navigation | -- |
+| VOLUME | MIX OUT volume | -- |
+
+### Buttons
+
+| Control | Function |
+|---------|----------|
+| PLAY | Play/stop |
+| REC | Recording standby |
+| SHIFT | Alternate functions |
+| PATTERN | Pattern selection mode |
+| CHORD | Toggle chord mode |
+| SOUND | Sound/patch selection |
+| STYLE ON | Toggle phrase variation on/off |
+| HOLD | Hold notes |
+| GENRE | Genre selection |
+| Step 1-8 | Chord sequencer steps |
+| OCT-/OCT+ | Octave shift |
+
 ## Limitations
 - Only one CC recognized (CC 64 Hold) -- no remote control of filter, envelope, delay, reverb, or phrase parameters via MIDI
 - No pitch bend

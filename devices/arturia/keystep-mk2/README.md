@@ -78,6 +78,51 @@ All MIDI output simultaneous on USB + DIN.
 ## Software
 - **Arturia MIDI Control Center** — MIDI mapping, firmware updates, sequence backup
 
+## Physical Controls
+
+### Top Row — Mode & Function Buttons
+| Control | Function |
+|---------|----------|
+| Sequencer | Enter sequencer mode |
+| Arpeggiator | Enter arpeggiator mode |
+| Chord | Enable chord mode |
+| Scale | Lock output to selected scale/key |
+| Mutate | Apply generative mutation to pattern |
+| Hold | Latch notes in arp mode |
+| SHIFT | Activate secondary functions |
+| MIDI CC | Select CC bank (short) / edit bank (long) |
+
+### Transport
+| Control | Function |
+|---------|----------|
+| Play | Start sequencer/arp playback |
+| Stop | Stop playback |
+| Record | Arm step or real-time recording |
+
+### Editing
+| Control | Function |
+|---------|----------|
+| Nudge | Shift pattern timing |
+| Octave Up/Down | Shift keyboard octave |
+| Double | Double pattern length |
+| Quantize | Quantize recorded pattern |
+| Reload | Reload saved pattern |
+| Clear | Clear current pattern |
+| Undo | Undo last edit |
+
+### Touch Strips
+| Strip | Normal | SHIFT |
+|-------|--------|-------|
+| Pitch | Pitch bend | Gate length |
+| Mod | Modulation (CC 1) | Spice (randomization) |
+
+### OLED Display + Data Encoder
+Click-encoder for menu navigation, value adjustment, preset/pattern selection.
+
+### Program Change
+
+**Limited / indirect.** The KeyStep mk2 does not have a dedicated front-panel "send PC" function. The MIDI CC button provides 4 banks of 16 assignable CC controls, not PC. PC send is most likely configurable through Arturia MIDI Control Center desktop software. The device receives PC for pattern changes.
+
 ## Limitations
 - No sound engine (controller only)
 - Slim keys (not full-size)

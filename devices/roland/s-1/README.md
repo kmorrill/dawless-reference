@@ -105,6 +105,57 @@
 - **MIDI Thru**: Configurable
 - **Sync clocks per beat**: 1, 2, 3, 4, 6, 8, 12, 24
 
+## Physical Controls
+
+### Layout
+Two-octave rubber keyboard (26 keys, doubling as function buttons). Four-digit 7-segment LED display. Trimmer-style knobs across the top panel.
+
+### Synth Knobs (Normal / SHIFT)
+
+| Section | Knob | Normal (CC#) | SHIFT (CC#) |
+|---------|------|-------------|-------------|
+| LFO | RATE | LFO Rate (#3) | LFO Mode (#79) |
+| LFO | WAVE FORM | LFO Waveform (#12) | LFO Sync (#106) |
+| OSC | RANGE | Oscillator Range (#14) | Fine Tune (#76) |
+| OSC | LFO | OSC LFO depth (#13) | Chop Overtone (#103) |
+| OSC | Square | Square Level (#19) | Pulse Width (#15) / Draw Multiply (#102) |
+| OSC | Sawtooth | Saw Level (#20) | Draw Switch (#107) |
+| OSC | SUB | Sub Osc Level (#21) | Chop Comb (#104) |
+| OSC | NOISE | Noise Level (#23) | Noise Mode (#78) / Riser |
+| FILTER | FREQ | Filter Cutoff (#74) | -- |
+| FILTER | RESO | Resonance (#71) | -- |
+| FILTER | LFO | Filter LFO (#25) | -- |
+| FILTER | ENV | Filter Envelope (#24) | Key Follow (#26) |
+| ENV | ATTACK | Attack (#73) | -- |
+| ENV | DECAY | Decay (#75) | -- |
+| ENV | SUSTAIN | Sustain (#30) | -- |
+| ENV | RELEASE | Release (#72) | -- |
+| EFX | DELAY | Delay Level (#92) | Delay Time (#90) |
+| EFX | REVERB | Reverb Level (#91) | Reverb Time (#89) |
+
+### Utility Controls
+
+| Control | Function |
+|---------|----------|
+| TEMPO/VALUE knob | Changes display values; with SHIFT fine-tunes tempo |
+| VOLUME knob | MIX OUT volume |
+| PLAY button | Play/stop pattern |
+| REC button | Recording standby |
+| SHIFT button | Accesses alternate knob functions |
+| PATTERN button | Pattern selection mode |
+| STEP button | Step sequencer mode |
+
+Total: 18 synth knobs + 2 utility knobs = 20 knobs, plus buttons.
+
+## 3rd-Party Repos
+
+| Repo | Description |
+|------|-------------|
+| [natebosch/aira_pattern_editor](https://github.com/natebosch/aira_pattern_editor) | Flutter web app for editing T-8/S-1 pattern backup files |
+| [pencilresearch/midi](https://github.com/pencilresearch/midi) | MIDI CC & NRPN database with Roland AIRA entries |
+
+**Notable non-GitHub**: Momo Muller S-1 VST editor plugin, Dennis Shaw free S-1 editor plugin.
+
 ## Limitations
 - No SysEx (no patch dump/restore)
 - No aftertouch

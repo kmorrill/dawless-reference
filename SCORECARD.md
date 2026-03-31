@@ -33,59 +33,51 @@ Tracks what's documented for each device and what's missing. Used to prioritize 
 
 | Device | Overview | Conn. | CC Deep | PC | Chan | Sync | Controls | SysEx/USB | Limits | Software | impl.md | Formats | PDFs | 3P Repos | Local Mine |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| **TE OP-XY** | ✅ | ✅ | 🟡 | ❌ | ✅ | ❌ | 🟡 | ❌ | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ | 🟡 |
-| **Roland S-1** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ❌ | ✅ | ➖ | ✅ | ❌ | 🟡 |
-| **Roland E-4** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ❌ | ✅ | ➖ | ✅ | ❌ | 🟡 |
-| **Roland J-6** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ❌ | ✅ | ➖ | ✅ | ❌ | 🟡 |
-| **Roland T-8** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ❌ | ✅ | ➖ | ✅ | ❌ | 🟡 |
-| **MiniFreak** | ✅ | ✅ | ✅ | ✅ | 🟡 | 🟡 | ❌ | 🟡 | ✅ | ✅ | ❌ | ➖ | ❌ | ❌ | ❌ |
-| **MicroFreak** | ✅ | ✅ | ✅ | 🟡 | 🟡 | 🟡 | ❌ | ❌ | ✅ | 🟡 | ❌ | ➖ | ❌ | ❌ | ❌ |
-| **Rytm MK2** | ✅ | ✅ | 🟡 | 🟡 | ✅ | 🟡 | ❌ | ❌ | ✅ | ✅ | ❌ | ➖ | ❌ | ❌ | ❌ |
-| **Osmose** | ✅ | ✅ | 🟡 | ❌ | ✅ | ❌ | ❌ | ❌ | ✅ | ❌ | ❌ | ➖ | ❌ | ❌ | ❌ |
-| **KeyStep MK2** | ✅ | ✅ | 🟡 | ❌ | 🟡 | ✅ | ❌ | ❌ | 🟡 | 🟡 | ❌ | ➖ | ❌ | ❌ | ❌ |
-| **NDLR** | 🟡 | ✅ | 🟡 | 🟡 | 🟡 | 🟡 | ❌ | 🟡 | ❌ | ❌ | ❌ | ➖ | ❌ | ❌ | 🟡 |
-| **OP-Z** | 🟡 | ✅ | 🟡 | 🟡 | ✅ | 🟡 | ❌ | ❌ | 🟡 | ❌ | ❌ | ➖ | ❌ | ❌ | ❌ |
-| **TX-6** | 🟡 | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | 🟡 | ❌ | ❌ | ➖ | ❌ | ❌ | ❌ |
-| **TP-7** | 🟡 | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | 🟡 | ❌ | ❌ | ➖ | ❌ | ❌ | ❌ |
-| **Polyend Synth** | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ | ❌ | 🟡 | ❌ | ❌ | ❌ | ➖ | ❌ | ❌ | ❌ |
-| **ROLI Blocks** | 🟡 | ✅ | 🟡 | ❌ | ✅ | ➖ | ❌ | ❌ | 🟡 | 🟡 | ❌ | ➖ | ❌ | ❌ | ❌ |
-| **ROLI Rise 2** | 🟡 | ✅ | 🟡 | ❌ | ✅ | ➖ | ❌ | ❌ | 🟡 | 🟡 | ❌ | ➖ | ❌ | ❌ | ❌ |
+| **TE OP-XY** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 🟡 | ❌ | ✅ | ❌ | ❌ | ✅ | ❌ | ✅ | ✅ |
+| **Roland S-1** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ➖ | ✅ | ✅ | 🟡 |
+| **Roland E-4** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ➖ | ✅ | ✅ | 🟡 |
+| **Roland J-6** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ➖ | ✅ | ➖ | 🟡 |
+| **Roland T-8** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ➖ | ✅ | ✅ | 🟡 |
+| **MiniFreak** | ✅ | ✅ | ✅ | ✅ | 🟡 | 🟡 | ✅ | 🟡 | ✅ | ✅ | ❌ | ➖ | ❌ | ✅ | ❌ |
+| **MicroFreak** | ✅ | ✅ | ✅ | 🟡 | 🟡 | 🟡 | ✅ | ❌ | ✅ | 🟡 | ❌ | ➖ | ❌ | ✅ | ❌ |
+| **Rytm MK2** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ |
+| **Osmose** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ | ➖ | ❌ | ✅ | ❌ |
+| **KeyStep MK2** | ✅ | ✅ | 🟡 | 🟡 | 🟡 | ✅ | ✅ | ❌ | ✅ | 🟡 | ❌ | ➖ | ❌ | ➖ | ❌ |
+| **NDLR** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ➖ | ✅ | ❌ | ❌ | ➖ | ❌ | ✅ | ❌ |
+| **OP-Z** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ | ➖ | ❌ | ✅ | ❌ |
+| **TX-6** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ | ➖ | ❌ | ✅ | ❌ |
+| **TP-7** | ✅ | ✅ | ✅ | ❌ | ✅ | ❌ | ✅ | ❌ | ✅ | ❌ | ❌ | ➖ | ❌ | ✅ | ❌ |
+| **Polyend Synth** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 🟡 | ✅ | ❌ | ❌ | ➖ | ❌ | ❌ | ❌ |
+| **ROLI Blocks** | ✅ | ✅ | 🟡 | ❌ | ✅ | ➖ | ✅ | ✅ | ✅ | 🟡 | ❌ | ➖ | ❌ | ✅ | ❌ |
+| **ROLI Rise 2** | ✅ | ✅ | 🟡 | ❌ | ✅ | ➖ | ❌ | ✅ | ✅ | 🟡 | ❌ | ➖ | ❌ | ✅ | ❌ |
 | **Pocket Ops** | 🟡 | ✅ | ➖ | ➖ | ❌ | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ | ➖ | ❌ | ❌ | ❌ |
-| **Norns** | ✅ | ✅ | ➖ | ➖ | 🟡 | ➖ | 🟡 | 🟡 | ❌ | 🟡 | ❌ | ➖ | ❌ | ❌ | ❌ |
-| **Grid** | ✅ | ✅ | ➖ | ➖ | ➖ | ➖ | ➖ | ✅ | ❌ | 🟡 | ❌ | ➖ | ❌ | ❌ | ❌ |
-| **Arc** | ✅ | ✅ | ➖ | ➖ | ➖ | ➖ | ➖ | ✅ | ❌ | 🟡 | ❌ | ➖ | ❌ | ❌ | ❌ |
+| **Norns** | ✅ | ✅ | ➖ | ➖ | 🟡 | ➖ | 🟡 | 🟡 | ✅ | 🟡 | ❌ | ➖ | ❌ | ✅ | ❌ |
+| **Grid** | ✅ | ✅ | ➖ | ➖ | ➖ | ➖ | ➖ | ✅ | ✅ | 🟡 | ❌ | ➖ | ❌ | ✅ | ❌ |
+| **Arc** | ✅ | ✅ | ➖ | ➖ | ➖ | ➖ | ➖ | ✅ | ✅ | 🟡 | ❌ | ➖ | ❌ | ✅ | ❌ |
 | **CM-15** | ✅ | ✅ | ➖ | ➖ | ➖ | ➖ | ❌ | ➖ | 🟡 | ➖ | ❌ | ➖ | ❌ | ❌ | ❌ |
 
-## Priority Queue
+## Priority Queue (updated 2026-03-31)
 
-### P1 — High-value targets
+### Completed
+All P1, P2, and P3 devices have been researched and documented. Major improvements:
+- **Rytm MK2**: Full per-engine CC/NRPN tables, SysEx protocol, 3P repos, local repo mining
+- **TX-6**: Full CC map (9 channels), PC, sync, BLE MIDI, 3P repos
+- **OP-XY**: PC, sync, 3P repos, deep local mine
+- **Polyend Synth**: Full rewrite — 87 controls, 10 engines, CC map, arp, sequencer
+- **TP-7**: Bidirectional CC map, physical controls, 3P repos
+- **Norns/Grid/Arc**: Full rewrites with protocol details, limitations, 3P repos
+- **ROLI Blocks/Rise 2**: SysEx protocol, physical controls, 3P repos
+- **Osmose**: PC (fw 2.0), sync, Haken Editor protocol, physical controls, 3P repos
+- **NDLR**: Complete CC table (~50 CCs), 3P repos, limitations
+- **OP-Z**: Full CC table, midi.json format, SysEx, step components, 25+ 3P repos
+- **AIRA Compacts**: Physical controls for all 4 devices, 3P repos
+- **Arturia**: Physical controls + CC maps for MiniFreak (41 CCs), MicroFreak (21 CCs), KeyStep mk2
 
-| # | Device | Key gaps | Approach |
-|---|---|---|---|
-| 1 | **Elektron Analog Rytm MK2** | Full per-engine CC map, SysEx/NRPN, Overbridge protocol, 3P repos | Mine local rytm repo (believed open-sourced), web research |
-| 2 | **TE TX-6** | CC map, channel routing, sync, USB host MIDI protocol, 3P repos | Web research (TE guides, community) |
-| 3 | **TE OP-XY** | PC behavior, sync/ppqn, SysEx/USB control, 3P repos, deeper local mine | Mine local repos (op-xy-live, op-xy-vibing, xy-format, xy-remix), web research |
-| 4 | **Polyend Synth** | Overview, connectivity, controls, limitations | Web research |
-| 5 | **TP-7** | Nearly everything — CC, PC, sync, controls, USB protocol | Web research (TE guides) |
+### Remaining gaps
 
-### P2 — Medium value
-
-| # | Device | Key gaps |
-|---|---|---|
-| 6 | **Monome Norns** | Limitations, 3P repos (community scripts, engines) |
-| 7 | **Monome Grid** | Limitations, 3P repos |
-| 8 | **Monome Arc** | Limitations, 3P repos |
-| 9 | **ROLI Rise 2** | SysEx, controls, 3P repos |
-| 10 | **ROLI Blocks** | SysEx, controls, 3P repos |
-| 11 | **Osmose** | PC, sync, Haken Editor USB protocol, 3P repos |
-| 12 | **KeyStep MK2** | PC, controls, SysEx |
-| 13 | **MiniFreak/MicroFreak** | Controls map, PDFs |
-
-### P3 — Lower urgency
-
-| # | Device | Key gaps |
-|---|---|---|
-| 14 | **NDLR** | CC summary in README, limitations (reference device, not owned) |
-| 15 | **OP-Z** | Full per-track CC table, midi.json format, 3P repos |
-| 16 | **Roland AIRA (S-1/E-4/J-6/T-8)** | Controls map, 3P repos (already best-documented tier) |
-| 17 | **Pocket Ops / CM-15** | Minimal MIDI surface — diminishing returns |
+| Device | Remaining gaps |
+|---|---|
+| **OP-XY** | SysEx/USB protocol, companion software docs |
+| **KeyStep MK2** | SysEx, deeper PC investigation |
+| **Pocket Ops / CM-15** | Minimal MIDI surface — diminishing returns |
+| **Various** | PDFs, impl.md files, companion software docs |
