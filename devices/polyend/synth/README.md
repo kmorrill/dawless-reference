@@ -1,294 +1,132 @@
 # Polyend Synth
 
-This repo can target the **Polyend Synth** as a MIDI destination (alongside OP-XY or other devices) using per-track MIDI port routing, Program Changes, and CC automation. The Polyend Synth has engine-specific CC maps, per-slot MIDI channels, and scene-level program change mapping, so a little setup goes a long way.
+## Overview
+- **Type**: Multi-engine polyphonic desktop synthesizer
+- **Voices**: 8 (shared across 3 simultaneous synth engine slots)
+- **Multitimbral**: 3 parts (synth slots), each loadable with any engine
+- **Pads**: 60 (5x12 grid), silicone, velocity-sensitive + polyphonic aftertouch
+- **Display**: Color LCD
+- **Engines (9+1)**: ACD (acid/303), FAT (Minimoog), VAP (Prophet poly), WAVS (wavetable), WTFM (2-op FM), PMD (physical modeling), PHZ (phase distortion), GRAIN (granular, paraphonic), DWA (dual wavetable, fw 1.3+), MIDI Instrument (CC controller preset)
+- **Dimensions**: 282 x 207 x 35 mm, 1.2 kg
+- **Power**: 5V / 1A via USB-C (can run from battery bank)
+- **Internal clock**: 96 PPQN internal, 24 PPQN over MIDI
+- **Tempo**: 10-400 BPM
 
-Source reference: `op-xy-live/docs/polyend-synth-midi.md` (Polyend Synth Manual 2v0a notes).
+## Connectivity
+| Interface | Direction | Details |
+|-----------|-----------|---------|
+| USB-C | In/Out | Power + USB MIDI + USB storage mode |
+| 3.5mm TRS MIDI Out | Out | Type B (5-pin DIN adapter included) |
+| 3.5mm TRS MIDI In | In | Type B (only 1 adapter included — need 2nd for simultaneous in/out) |
+| 3.5mm stereo TRS | Out | Shared line + headphone output (9 dBu peak line, SNR 97-98 dB) |
+| microSD | — | 16 GB included; firmware, patches, samples, scenes |
 
-## Routing tracks to the Polyend Synth
+No CV/gate, no expression pedal, no individual per-part outputs, no USB audio.
 
-Set `track.portName` to a substring that matches your Polyend Synth MIDI output port name (as returned by `mido.get_output_names()`), for example:
+## MIDI Channel Configuration
+- Each of the 3 synth slots has an assignable MIDI channel
+- Same channel is used for both send and receive (can create feedback loops)
+- No dedicated per-synth independent I/O channels
+- No MIDI Thru (input does not pass to output)
 
-```json
-{
-  "id": "t-poly",
-  "name": "Polyend Pad",
-  "type": "ACD",
-  "device": "polyend_synth",
-  "portName": "Polyend Synth",
-  "midiChannel": 0,
-  "pattern": { "lengthBars": 1, "steps": [] }
-}
-```
+## MIDI CC Map
 
-Tracks without `track.portName` fall back to `deviceProfile.portName`, and then to the Conductor `--port` flag.
+### Common Across All Engines
+| CC | Parameter |
+|----|-----------|
+| 74 | Filter Cutoff |
+| 71 | Filter Resonance |
+| 77 | Filter Env Amount |
+| 78 | Filter LFO |
+| 75 | Amp Attack |
+| 72 | Amp Decay |
+| 76 | Amp Sustain |
+| 73 | Amp Release |
+| 80 | Filter Env Attack |
+| 81 | Filter Env Decay |
+| 82 | Filter Env Sustain |
+| 83 | Filter Env Release |
+| 46 | Aux Env Attack |
+| 47 | Aux Env Decay |
+| 48 | Aux Env Sustain |
+| 49 | Aux Env Release |
+| 54 | LFO Frequency |
 
-## Supported incoming MIDI on Polyend Synth
+### Engine-Specific Oscillator Parameters (CC 20-31)
+These vary per engine — CC 20-31 map to engine-specific oscillator/waveshaping parameters. See the full per-engine CC tables in the Polyend Synth manual.
 
-Polyend Synth accepts:
-- Note On/Off
-- Velocity (macro source; default routing is volume)
-- Aftertouch / Channel Pressure (macro source)
-- Pitch Bend
-- CC (Control Change)
-- PC (Program Change) for preset switching (scene mapping)
+## Program Change
+- 8 slots (PC 0-7), mapped at the scene level
+- Limited to scene-level recall, not individual preset selection
 
-Not supported: SysEx, NRPN.
+## Sync
+- MIDI clock send/receive (24 PPQN over MIDI, 96 PPQN internal)
+- Transport start/stop
+- Tempo range 10-400 BPM
 
-## MIDI settings on the Polyend Synth
+## Physical Controls
 
-All MIDI configuration lives in Main Menu -> MIDI.
+### Top Panel (87 total controls)
+| Control | Type | Function |
+|---------|------|----------|
+| Volume | Touch encoder | Master volume |
+| Tempo | Touch encoder | Global tempo; Shift = swing 25%-75% |
+| Pitchbend | Touch encoder | Pitch bend -100 to +100, spring-returns to 0 on release |
+| C1, C2, C3 | Touch encoders (x3) | Macro / combo controls for one or all synths |
+| Parameter knobs | Touch encoders (3x3 grid, 9 total) | Context-dependent: edit whichever page is displayed |
+| Screen encoder | Clickable rotary (detented) | Navigate menus, select options |
+| Screen buttons (x3) | Buttons below display | Select synth 1/2/3 or context actions |
+| Engine | Button | Open oscillator/engine page |
+| Filter | Button | Open filter page; Shift = cycle effects |
+| ADSR | Button | Open filter/amp envelope pages |
+| LFO | Button | Open LFO page |
+| Seq | Button | Cycle Off / Arp / Sequencer; Shift = modulation matrix |
+| Mixer/Effects | Button | Open mixer; Shift = effects |
+| Scene/Preset | Button | Scene manager; Shift = preset browser |
+| Shift | Modifier | Access secondary functions |
+| 60 Pads | 5x12 RGB backlit silicone | Play notes, velocity + poly aftertouch |
 
-### Clock In / Transport In
-- Clock In: Internal (default) or External via USB or MIDI IN.
-- Transport In: Off (default) or USB/MIDI IN.
-- Wait for Start: if enabled, the arp/seq only runs after MIDI Start.
+## Arpeggiator
+14 types: Up, Down, Play Order, Random, Chord, Dyad, Triad, Inside Out, Outside In, Up Down, Down Up, Weave, Return, Double Return. 1-8 octave range. Swing 50-75%, 11 groove templates, humanize 0-100%.
 
-Implementation note: the synth uses internal timing at 96 PPQN, but MIDI clock is 24 PPQN.
+## Sequencer
+- Up to 64 notes per synth engine (3 independent sequencers)
+- Real-time recording only (no step-input editing)
+- Pad transposes playback relative to recorded pattern
+- No parameter locks, no per-step editing, no pattern chaining, no song mode
 
-### Per-slot MIDI channel + Local Mode
-Each of the 3 synth slots has:
-- A MIDI channel (target slot 1 vs 2 vs 3)
-- Local Mode
-  - ON: pads + MIDI both play the slot
-  - OFF: pads disconnected; external MIDI only
+## SysEx
+None. No SysEx or NRPN support.
 
-### External keyboard pad mapping
-Incoming note mapping can be Off, All, or White Keys, with a Base Note for alignment.
+## Software
+- **Firmware (.psf)**: Downloaded from polyend.com, manually copied to microSD
+- **USB Storage Mode**: Access microSD contents via USB-C for file transfer
+- No companion app, no desktop editor, no preset manager, no librarian
 
-## Targeting the 3 synth engines (repo behavior)
+Latest firmware: **1.3.1** (added DWA engine, MIDI pad mapping, MIDI Instrument, customizable pad colors, aftertouch type selection).
 
-Send MIDI to the slot's configured MIDI channel.
+## 3rd-Party Repos
+No Polyend Synth-specific repos exist on GitHub. The broader Polyend ecosystem is focused on the Tracker product line.
 
-Implementation note: engine-specific CC lookup is keyed by MIDI channel in `src/devices/polyend-synth.js`. If your slot/channel assignment differs, update it via `deviceDefinition.setSynthEngine(channel, { name: "ACD", type: "..." })` or `liveLoop.setEngine("ACD")`.
+## Not Controllable via MIDI
+- Mixer levels and panning
+- Effect send amounts and parameters
+- Scene loading (no MIDI scene recall)
+- Grid layout/mode changes
+- Macro assignments
 
-## Program Change support
-
-- PC 0-7 maps to 8 preset slots (scene-level mapping)
-- Configure in Main Menu -> Scene Settings -> Program Change Mapping
-- Preset must match the engine loaded in that slot
-- Some devices count PCs from 1; support a `pcBase = 0|1` offset
-
-Example:
-
-```json
-{
-  "program": { "program": 10, "bankMsb": 1, "bankLsb": 2 },
-  "programChanges": [
-    { "t": { "bar": 0, "step": 8 }, "program": 11 }
-  ]
-}
-```
-
-## CC automation and parameter names
-
-You can always target CCs directly via `cc:<number>` or an integer `dest`:
-
-```json
-{ "id": "cut", "dest": "cc:74", "points": [{ "t": { "bar": 0, "step": 0 }, "v": 64 }] }
-```
-
-If `track.device` is set to `polyend_synth`, `name:<id>` destinations resolve using the built-in Polyend Synth CC map. Example mappings:
-- `name:cutoff` -> CC74
-- `name:resonance` -> CC71
-- `name:amp_attack` -> CC75
-- `name:filter_attack` -> CC80
-
-The current full map is in `conductor/devices/polyend_synth.py`.
-
-### Shared CCs (common across engines)
-
-Filter:
-- CC 74 = Filter Cutoff
-- CC 71 = Filter Resonance
-- CC 77 = Filter Env Amount
-- CC 78 = Filter LFO (where applicable)
-
-Amp Envelope (Env Amp):
-- CC 75 = Attack
-- CC 72 = Decay
-- CC 76 = Sustain
-- CC 73 = Release
-
-Filter Envelope (Env Filter):
-- CC 80 = Attack
-- CC 81 = Decay
-- CC 82 = Sustain
-- CC 83 = Release
-
-Aux Envelope (Env Aux, engines that support Aux only):
-- CC 46 = Attack
-- CC 47 = Decay
-- CC 48 = Sustain
-- CC 49 = Release
-
-### Engine-specific CC highlights
-
-ACD:
-- CC 20 Saw Mix
-- CC 21 Square Mix
-- CC 22 Sub Mix
-- CC 23 Noise
-- CC 24 PW
-- CC 25 PW LFO
-- CC 26 PW Env
-- CC 27 Pitch LFO
-
-FAT:
-- CC 20 Timbre
-- CC 21 Noise
-- CC 23 Brightness
-- CC 24 Fatness LFO
-- CC 27 Fatness
-- CC 54 LFO Frequency
-
-WAVS:
-- CC 20 Mix
-- CC 21 Warp 1
-- CC 22 Position 1
-- CC 25 Tune 1
-- CC 26 Finetune
-- CC 27 Position 2
-- CC 28 Warp 2
-- CC 29 Noise
-- CC 30 Tune 2
-- CC 31 Detune
-
-VAP:
-- CC 20 Mix
-- CC 21 PW 1
-- CC 22 Shape 1
-- CC 23 Noise
-- CC 25 Tune 1
-- CC 26 Detune
-- CC 27 Shape 2
-- CC 28 PW 2
-- CC 30 Tune 2
-- CC 31 Finetune
-
-WTFM:
-- CC 20 FM
-- CC 21 Feedback 1
-- CC 22 Shape 1
-- CC 23 Ratio 1
-- CC 24 Ratio 2
-- CC 25 Finetune 2
-- CC 26 Finetune 1
-- CC 27 Shape 2
-- CC 28 Feedback 2
-- CC 29 Feedback 2->1
-
-PMD (Exciter):
-- CC 20 Bow Level
-- CC 21 Bow Timbre
-- CC 22 Air Level
-- CC 23 Air Flow
-- CC 24 Air Timbre
-- CC 25 Strike Level
-- CC 26 Strike Mallet
-- CC 27 Strike Timbre
-
-PMD (Resonator):
-- CC 70 Form
-- CC 71 Damping
-- CC 74 Brightness
-- CC 85 Position
-- CC 86 Space
-
-PHZ:
-- CC 20 Mix
-- CC 21 Osc1 XMod
-- CC 22 Shape 1
-- CC 23 Osc1 YMod
-- CC 24 Detune
-- CC 25 Tune 1
-- CC 26 Finetune
-- CC 27 Shape 2
-- CC 28 Osc2 XMod
-- CC 29 Osc2 YMod
-- CC 30 Tune 2
-
-GRAIN (Engine page 1):
-- CC 20 Position
-- CC 21 Position Spread
-- CC 22 Time Spread
-- CC 23 Density
-- CC 24 Grain Size
-- CC 25 Grain Shape
-- CC 27 Pan Spread
-
-GRAIN (Engine page 2):
-- CC 26 Detune Spread
-- CC 30 Tune
-- CC 31 Finetune
-- CC 85 Space
-- CC 86 Direction
-- CC 87 Size Spread
-
-## Parameter keys for automation (code-facing)
-
-Use these keys with LFO `targetParam`, loop automation events (`param`), or `liveLoop.setParam`.
-
-Common keys:
-- filterCutoff, resonance, envAmount, filterLfo
-- ampAttack, ampDecay, ampSustain, ampRelease
-- filterAttack, filterDecay, filterSustain, filterRelease
-- auxAttack, auxDecay, auxSustain, auxRelease (engines with Aux only)
-- lfoFrequency (FAT only)
-
-ACD:
-- sawMix, squareMix, subMix, noise, pulseWidth, pwLfo, pwEnv, pitchLfo
-
-FAT:
-- timbre, noise, brightness, fatnessLfo, fatness, lfoFrequency
-
-WAVS:
-- mix, warp1, position1, tune1, finetune, position2, warp2, noise, tune2, detune
-
-VAP:
-- mix, pw1, shape1, noise, tune1, detune, shape2, pw2, tune2, finetune
-
-WTFM:
-- fm, feedback1, shape1, ratio1, ratio2, finetune2, finetune1, shape2, feedback2, feedback2to1
-
-PMD:
-- bowLevel, bowTimbre, airLevel, airFlow, airTimbre, strikeLevel, strikeMallet, strikeTimbre
-- form, damping, brightness, position, space
-- exciterAttack, exciterDecay, exciterSustain, exciterRelease
-- ampAttack, ampDecay, ampSustain, ampRelease
-- filterAttack, filterDecay, filterSustain, filterRelease
-
-PHZ:
-- mix, osc1XMod, shape1, osc1YMod, detune, tune1, finetune, shape2, osc2XMod, osc2YMod, tune2
-
-GRAIN:
-- position, positionSpread, timeSpread, density, grainSize, grainShape, panSpread
-- detuneSpread, tune, finetune, space, direction, sizeSpread
-
-## Scaling + implementation notes
-
-- CC values are 0-127 and map into each parameter's range (assume linear unless tested otherwise).
-- Unipolar: `value = min + (cc/127) * (max - min)`
-- Bipolar: `value = -1 + 2 * (cc/127)`, then scale
-- Enums: quantize CC into N bins
-
-Controller layers should track which engine is loaded per slot, use the engine-specific CC map, and still allow shared CCs (filter/env) when present.
-
-## Checklist
-
-Per synth slot:
-- MIDI channel set correctly
-- Local Mode set as intended
-- Notes trigger sound
-- Velocity and aftertouch respond as intended
-- Pitch bend behaves as expected
-- CCs respond for filter/env and engine-specific params
-- PC mapping set, PC 0-7 switches presets
-
-Clock/transport:
-- Clock In set to USB or MIDI IN
-- Transport In set correctly
-- Wait for Start set appropriately for the sender
-
-## Appendix: MIDI Instrument engine
-
-Polyend Synth includes a MIDI Instrument engine for controlling external gear by sending CCs from its knobs/pages. This is separate from controlling Synth itself but matters in controller-heavy rigs.
+## Limitations
+- **8 voices shared** across 3 parts (no per-part voice allocation)
+- Single stereo output (shared line + headphone on one 3.5mm jack)
+- No USB audio interface
+- No individual per-part outputs
+- No SysEx, no NRPN
+- No MIDI Thru
+- Same channel for send/receive per synth (feedback risk)
+- Program Change limited to 8 slots
+- Type B TRS MIDI (many devices use Type A)
+- Only 1 MIDI DIN adapter included
+- Generic knobs change function per engine — requires constant screen reference
+- Pad velocity can be inconsistent
+- CPU overload possible when stacking heavy engines (especially GRAIN)
+- Prone to digital clipping when layering 3 engines at high mixer levels
